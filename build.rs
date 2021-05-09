@@ -160,6 +160,7 @@ fn search() -> PathBuf {
 }
 
 fn fetch() -> io::Result<()> {
+    println!("Fetching ffmpeg...");
     let output_base_path = output();
     let clone_dest_dir = format!("ffmpeg-{}", version());
     let _ = std::fs::remove_dir_all(output_base_path.join(&clone_dest_dir));
@@ -627,7 +628,9 @@ fn link_to_libraries(statik: bool) {
 }
 
 fn main() {
+    println!("Starting main");
     let statik = env::var("CARGO_FEATURE_STATIC").is_ok();
+    println!("Statik is: {:?}", statik);
 
     let include_paths: Vec<PathBuf> = if env::var("CARGO_FEATURE_BUILD").is_ok() {
         println!(
